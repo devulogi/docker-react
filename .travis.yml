@@ -1,0 +1,17 @@
+sudo: required
+services:
+  - docker
+
+befre_install:
+ - docker build -t jveux89/docker-react -f Dockerfile .
+
+script: docker run jveux89/docker-react  npm run test -- --
+
+deploy:
+  provider: elasticbeanstalk
+  region: "use-west-2"
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-west-2-30647662757"
+  bucket_path: "docker"
+  
